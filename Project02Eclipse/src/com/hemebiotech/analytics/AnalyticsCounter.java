@@ -1,43 +1,37 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;
-	private static int rashCount = 0;
-	private static int pupilCount = 0;
-	
+
 	public static void main(String args[]) throws Exception {
-
-		BufferedReader reader = new BufferedReader (new FileReader("Project02Eclipse/symptoms.txt"));
-		String line = reader.readLine();
-
-
-		while (line != null) {
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headacheCount++;
-				System.out.println("number of headaches: " + headacheCount);
-			}
-			else if (line.equals("rash")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
-
-			line = reader.readLine();
+		
+		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile("Project02Eclipse/symptoms.txt");
+		
+		HashSet<String> sympt = new HashSet<String>();
+		
+		TreeSet<String> symptoms = new TreeSet<String>(sympt);
+		
+		for(int i = 0; i<file.GetSymptoms().size(); i++) {
+			symptoms.add(file.GetSymptoms().get(i));
 		}
-		
-		reader.close();
-		
-
+			
+		Symptom symptom = new Symptom(null, 0);
 		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
+		
+		for(int i = 0; i < symptoms.size(); i++) {
+			symptom.setName((String) symptoms.toArray()[i]);
+			int count = 0;
+			for(int j = 0; j < file.GetSymptoms().size(); j++) {
+				if(symptoms.toArray()[i].equals(file.GetSymptoms().get(j))) {
+					count++;
+					symptom.setCount(count);
+				}
+			}	
+			writer.write(symptom.getName() + " : " + symptom.getCount()+"\n");	
+		}
 		writer.close();
 	}
 }
