@@ -18,21 +18,24 @@ public class CountSymptom {
 		this.fileout = fileout;
 	}
 
-	public void countSymptoms() throws IOException {
+	public void countSymptoms(){
 		int count = 0;
-		FileWriter writer = new FileWriter(fileout);
-		Symptom symptom = new Symptom(null, 0);
-		
-		for(int i = 0; i < tree.size(); i++) {
-			symptom.setName((String)tree.toArray()[i]);
-			count = 0;
-			for(int j = 0; j < list.size(); j++) {
-				if(tree.toArray()[i].equals(list.get(j))) {
-					count++;
+	
+		try {
+			FileWriter writer = new FileWriter(fileout);		
+			for(int i = 0; i < tree.size(); i++) {
+				String symptomName = (String)tree.toArray()[i];
+				count = 0;
+				for(int j = 0; j < list.size(); j++) {
+					if(tree.toArray()[i].equals(list.get(j))) {
+						count++;
+					}
 				}
+				writer.write(symptomName + " : " + count + "\n");
 			}
-			writer.write(symptom.getName() + " : " + count + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		writer.close();
 	}
 }

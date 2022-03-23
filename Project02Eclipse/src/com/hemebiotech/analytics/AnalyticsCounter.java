@@ -1,6 +1,5 @@
 package com.hemebiotech.analytics;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -10,11 +9,9 @@ public class AnalyticsCounter {
 	private String fileout;
 	
 	
-	public AnalyticsCounter(String file, String fileout) {
+	public AnalyticsCounter(String file, String fileout){
 		this.file = file;
 		this.fileout = fileout;
-		loadFile();
-		//sortFile();
 	}
 
 	// lire le fichier
@@ -28,14 +25,10 @@ public class AnalyticsCounter {
 			SortSymptomAlphabetical sortSymptomAlphabetical = new SortSymptomAlphabetical(loadFile());
 			return sortSymptomAlphabetical.sortSymptoms();
 		}
-	
-	//compter
-		public void count() throws IOException {
+		
+	//compter les occurences de symptomes et ecrire le dans fichier
+		public void count(){
 			CountSymptom countSymptom = new CountSymptom(sortFile(), loadFile(), fileout);
 			countSymptom.countSymptoms();
-			
 		}
-	
-	//ecrire le fichier
-
 }
