@@ -13,22 +13,41 @@ public class AnalyticsCounter {
 		this.file = file;
 		this.fileout = fileout;
 	}
+	
+	public void launchApp() {
+		loadFile();
+		sortFile();
+		count();
+		write();
+	}
 
 	// lire le fichier
-	public List<String> loadFile() {
+	private List<String> loadFile() {
 		ReadSymptomDataFromFile readSymptomDataFromFile = new ReadSymptomDataFromFile(file);
 		return readSymptomDataFromFile.getSymptoms();
 	}
 	
 	//crée liste des symptomes et les trier par ordre alphabétique
-		public TreeSet<String> sortFile() {
+	private TreeSet<String> sortFile() {
 			SortSymptomAlphabetical sortSymptomAlphabetical = new SortSymptomAlphabetical(loadFile());
 			return sortSymptomAlphabetical.sortSymptoms();
 		}
 		
-	//compter les occurences de symptomes et ecrire le dans fichier
-		public void count(){
-			CountSymptom countSymptom = new CountSymptom(sortFile(), loadFile(), fileout);
-			countSymptom.countSymptoms();
+	//compter les occurences de symptomes 
+	private List<Integer> count(){
+			CountSymptom countSymptom = new CountSymptom(sortFile(), loadFile());
+			return countSymptom.countSymptoms();
 		}
+	
+	//ecrire le dans fichier
+	private void write() {
+		WriteFile writeFile = new WriteFile(fileout);
+		writeFile.file();
+		
+		for (int i = 0; i < sortFile().toArray().length ; i++) {
+			writeFile.writer((String)sortFile().toArray()[i], count().get(i));
+		}
+		
+		writeFile.closeWriter();
+	}
 }
