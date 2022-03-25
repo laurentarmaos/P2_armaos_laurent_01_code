@@ -40,14 +40,14 @@ public class AnalyticsCounter {
 		}
 	
 	//ecrire le dans fichier
-	private void write() {
-		WriteFile writeFile = new WriteFile(fileout);
-		writeFile.file();
-		
-		for (int i = 0; i < sortFile().toArray().length ; i++) {
-			writeFile.writer((String)sortFile().toArray()[i], count().get(i));
-		}
-		
-		writeFile.closeWriter();
+	private void write(){
+		WriteFile writeFile = new WriteFile(sortFile(), count());
+		writeFile.createFile(fileout);
+//		
+//		for (int i = 0; i < sortFile().toArray().length ; i++) {
+//			writeFile.writer((String)sortFile().toArray()[i], count().get(i));
+//		}
+//		
+//		writeFile.closeWriter();
 	}
 }

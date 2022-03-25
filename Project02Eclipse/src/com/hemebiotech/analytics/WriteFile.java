@@ -2,34 +2,30 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
-public class WriteFile{
+public class WriteFile implements ISymptomWriter{
 	
-	private String fileout;
-	private FileWriter writer;
+	private TreeSet<String> tree = new TreeSet<String>();
+	private List<Integer> list = new ArrayList<Integer>();
 	
-	public WriteFile(String fileout) {
-		this.fileout = fileout;
+	
+	public WriteFile(TreeSet<String> tree, List<Integer> list) {
+		this.tree = tree;
+		this.list = list;
 	}
+
+
+	@Override
+	public void createFile(String fileout) {	
 	
-	public void file() {
 		try {
-			writer = new FileWriter(fileout);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void writer(String symptom, int occurrence) {
-		try {
-			writer.write(symptom + " : " + occurrence + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void closeWriter() {
-		try {
+			FileWriter writer = new FileWriter(fileout);
+			for (int i = 0; i < tree.toArray().length; i++) {
+				writer.write((String) tree.toArray()[i] +" : "+ list.get(i)+ "\n");
+			}
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
