@@ -18,6 +18,10 @@ public class WriteFile implements ISymptomWriter{
 	}
 
 
+	/**
+	 * Ecriture dans un fichier des symptomes et leurs occurences
+	 * fait à partir des tableaux créés 
+	 */
 	@Override
 	public void createFile(String fileout) {	
 	

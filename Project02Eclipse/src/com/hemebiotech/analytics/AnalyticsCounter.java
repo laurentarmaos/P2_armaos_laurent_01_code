@@ -7,6 +7,9 @@ public class AnalyticsCounter {
 	
 	private String file;
 	private String fileout;
+	private List<String> list;
+	private TreeSet<String> listTree;
+	private List<Integer> countSymptoms;
 	
 	
 	public AnalyticsCounter(String file, String fileout){
@@ -21,33 +24,27 @@ public class AnalyticsCounter {
 		write();
 	}
 
-	// lire le fichier
-	private List<String> loadFile() {
+
+	private void loadFile() {
 		ReadSymptomDataFromFile readSymptomDataFromFile = new ReadSymptomDataFromFile(file);
-		return readSymptomDataFromFile.getSymptoms();
+		list = readSymptomDataFromFile.getSymptoms();
 	}
 	
-	//crée liste des symptomes et les trier par ordre alphabétique
-	private TreeSet<String> sortFile() {
-			SortSymptomAlphabetical sortSymptomAlphabetical = new SortSymptomAlphabetical(loadFile());
-			return sortSymptomAlphabetical.sortSymptoms();
+
+	private void sortFile() {
+			SortSymptomAlphabetical sortSymptomAlphabetical = new SortSymptomAlphabetical(list);
+			listTree = sortSymptomAlphabetical.sortSymptoms();
 		}
 		
-	//compter les occurences de symptomes 
-	private List<Integer> count(){
-			CountSymptom countSymptom = new CountSymptom(sortFile(), loadFile());
-			return countSymptom.countSymptoms();
+
+	private void count(){
+			CountSymptom countSymptom = new CountSymptom(listTree, list);
+			countSymptoms = countSymptom.countSymptoms();
 		}
 	
-	//ecrire le dans fichier
+
 	private void write(){
-		WriteFile writeFile = new WriteFile(sortFile(), count());
+		WriteFile writeFile = new WriteFile(listTree, countSymptoms);
 		writeFile.createFile(fileout);
-//		
-//		for (int i = 0; i < sortFile().toArray().length ; i++) {
-//			writeFile.writer((String)sortFile().toArray()[i], count().get(i));
-//		}
-//		
-//		writeFile.closeWriter();
 	}
 }

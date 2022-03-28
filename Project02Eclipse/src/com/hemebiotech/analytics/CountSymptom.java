@@ -14,6 +14,10 @@ public class CountSymptom {
 		this.list = list;
 	}
 
+	/**
+	 * 
+	 * Création d'un  tableau énumérant l'occurence de chaques symptomes listés dans le tableau créé dans le fichier "SortSymptomAlphabetical.java"
+	 */
 	public List<Integer> countSymptoms(){
 		int count = 0;
 		ArrayList<Integer> result = new ArrayList<Integer>();

@@ -1,7 +1,6 @@
 package com.hemebiotech.analytics;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -13,11 +12,14 @@ public class SortSymptomAlphabetical {
 		this.list = list;
 	}
 
+	/**
+	 * 
+	 * Création d'un tableau regroupant les différents symptomes,
+	 * rangés par ordre alphabétique et sans doublon
+	 */
 	public TreeSet<String> sortSymptoms() {
 		
-		HashSet<String> sympt = new HashSet<String>();
-		
-		TreeSet<String> symptoms = new TreeSet<String>(sympt);
+		TreeSet<String> symptoms = new TreeSet<String>();
 		
 		for(int i = 0; i < list.size(); i++) {
 			symptoms.add(list.get(i));
