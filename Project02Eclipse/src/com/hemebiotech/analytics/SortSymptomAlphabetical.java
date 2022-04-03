@@ -18,13 +18,10 @@ public class SortSymptomAlphabetical {
 	 * rangés par ordre alphabétique et sans doublon
 	 */
 	public TreeSet<String> sortSymptoms() {
-		
-		TreeSet<String> symptoms = new TreeSet<String>();
-		
+		TreeSet<String> symptoms = new TreeSet<String>();	
 		for(int i = 0; i < list.size(); i++) {
 			symptoms.add(list.get(i));
-		}
-		
+		}	
 		return symptoms;
 	}
 }

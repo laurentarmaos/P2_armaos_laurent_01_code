@@ -22,15 +22,15 @@ public class CountSymptom {
 		int count = 0;
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		
-			for(int i = 0; i < tree.size(); i++) {
-				count = 0;
-				for(int j = 0; j < list.size(); j++) {
-					if(tree.toArray()[i].equals(list.get(j))) {
-						count++;
-					}
+		for(int i = 0; i < tree.size(); i++) {
+			count = 0;
+			for(int j = 0; j < list.size(); j++) {
+				if(tree.toArray()[i].equals(list.get(j))) {
+					count++;
 				}
-				result.add(count);
 			}
-			return result;
+			result.add(count);
+		}
+		return result;
 	}
 }
