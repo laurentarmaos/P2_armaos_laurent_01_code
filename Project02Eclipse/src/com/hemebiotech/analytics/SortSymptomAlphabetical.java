@@ -8,14 +8,18 @@ public class SortSymptomAlphabetical {
 
 	private List<String> list = new ArrayList<String>();
 
+	/**
+	 * 
+	 * @param list listing of all symptoms (with duplicates)
+	 */
 	public SortSymptomAlphabetical(List<String> list) {
 		this.list = list;
 	}
 
 	/**
+	 * The return value is a list of strings with no duplication and ordered by name
 	 * 
-	 * Création d'un tableau regroupant les différents symptomes,
-	 * rangés par ordre alphabétique et sans doublon
+	 * @return listing of all symptoms(no duplicate and alphabetical order)
 	 */
 	public TreeSet<String> sortSymptoms() {
 		TreeSet<String> symptoms = new TreeSet<String>();	

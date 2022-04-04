@@ -11,15 +11,17 @@ public class WriteFile implements ISymptomWriter{
 	private TreeSet<String> tree = new TreeSet<String>();
 	private List<Integer> list = new ArrayList<Integer>();
 	
+	/**
+	 * 
+	 * @param tree listing of all symptoms (no duplicate and sorted alphabetical)
+	 * @param list listing of occurrences of each symptoms
+	 */
 	public WriteFile(TreeSet<String> tree, List<Integer> list) {
 		this.tree = tree;
 		this.list = list;
 	}
 
-	/**
-	 * Ecriture dans un fichier des symptomes et leurs occurences
-	 * fait à partir des tableaux créés 
-	 */
+
 	@Override
 	public void createFile(String fileOut) {	
 	
